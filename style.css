@@ -1,12 +1,16 @@
         /* --- Reset & Base Styles --- */
         :root {
-            --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-body: 'Montserrat', sans-serif;
             --text-black: #000000;
             --text-grey: #666666;
             --bg-grey: #f5f5f5;
             --gold: #c5a059;
             --red: #cc0000;
         }
+
+        html {
+               scroll-behavior: smooth;
+             }
 
         * {
             margin: 0;
@@ -64,6 +68,7 @@
         }
 
         /* Search Bar (Left) */
+        
         .search-container {
             display: flex;
             align-items: center;
@@ -136,7 +141,7 @@
 
         .nav-links {
             display: flex;
-            gap: 35px;
+            gap: 55px;
         }
 
         .nav-links li a {
@@ -150,6 +155,64 @@
 
         .nav-links li a.highlight-gold { color: var(--gold); }
         .nav-links li a.highlight-red { color: var(--red); }
+
+
+
+
+/* --- FORCE MOBILE MENU STYLES --- */
+/* --- Mobile Menu Alignment Fix --- */
+@media (max-width: 900px) {
+    
+    /* 1. The Container: Full Screen & Flex Center */
+    .nav-bar {
+        position: fixed !important;
+        top: 0;
+        left: -100% !important;
+        width: 100%;
+        height: 100vh;
+        background-color: #ffffff;
+        z-index: 1000;
+        transition: left 0.3s ease-in-out;
+        
+        /* Flexbox to center the UL inside the NAV */
+        display: flex !important;
+        justify-content: center; /* Vertical Center */
+        align-items: center;     /* Horizontal Center */
+    }
+
+    .nav-bar.active {
+        left: 0 !important;
+    }
+
+    /* 2. The List (UL): Remove Padding & Center Text */
+    .nav-links {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px; /* Space between items */
+        
+        /* CRITICAL FIXES FOR CENTERING */
+        padding: 0 !important;   /* Removes default left indentation */
+        margin: 0 !important;    /* Removes default margins */
+        text-align: center !important; 
+        width: 100% !important;  /* Ensure it spans full width */
+    }
+
+    /* 3. The List Items (LI): Ensure no float */
+    .nav-links li {
+        display: block; /* or flex */
+        margin: 0 auto; /* Auto margins center block elements */
+    }
+
+    /* 4. The Links (A): Big Text */
+    .nav-links li a {
+        font-size: 1.5rem;
+        color: #1a1a1a;
+        display: inline-block; /* Allows text-align center to work */
+        text-decoration: none;
+    }
+}
+
+
 
         /* --- 3. Hero Section (Bottom Left Text & Button) --- */
         .hero-section {
@@ -331,6 +394,32 @@
         }
 
 
+                    /* --- Collection Header Style --- */
+            .collection-header {
+                text-align: center;              /* Centers the text */
+                font-family: var(--font-heading, serif); /* Uses your premium font */
+                font-size: 2.2rem;               /* Big size like other headers */
+                color: #1a1a1a;                  /* Dark Black */
+                margin-bottom: 50px;             /* Spacing below */
+                font-weight: 700;                /* Bold */
+                position: relative;
+            }
+
+
+                        /* The Gold Underline */
+            .collection-header::after {
+                content: '';
+                display: block;
+                width: 60px;               /* Width of the line */
+                height: 3px;               /* Thickness */
+                background-color: #c5a059; /* Gold Color */
+                margin: 15px auto 0 auto;  /* Centers the line below text */
+            }
+
+
+
+
+
 
         /* Section Spacing & Background */
         .editorial-section {
@@ -468,6 +557,11 @@
 
 
 
+      /* --- Trending Products Section --- */
+
+
+
+
         .trending-section {
             padding: 80px 40px;
             background: #fff;
@@ -486,12 +580,23 @@
             letter-spacing: 1px;
         }
 
+
+         .trending-title::after {
+            content: '';
+            display: block;
+            width: 60px;               /* Length of the line */
+            height: 3px;               /* Thickness */
+            background-color: #c5a059; /* Gold Color */
+            margin: 15px auto 0 auto;  /* Centers the line below text */
+        }
+
+
         .trending-subtitle {
             color: #666;
             font-style: italic;
         }
 
-        /* Grid Layout */
+
         .product-grid-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr); /* 4 Columns */
@@ -503,9 +608,16 @@
         /* Card Styling */
         .product-card {
             cursor: pointer;
-            group: hover;
+            
         }
 
+         .product-name {
+            font-weight: 800 !important; /* Extra Bold */
+            font-size: 24px !important;  /* Much Bigger */
+            color: #000;                 /* Pure Black */
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
         .product-image-wrapper {
             position: relative;
             width: 100%;
@@ -663,177 +775,306 @@
         }
 
 
-        footer {
-            background-color: #111;
-            color: #fff;
-            margin-top: 0;
-        }
 
-        /* --- Newsletter Strip --- */
-        .newsletter-strip {
-            background-color: #1a1a1a;
-            padding: 50px 20px;
-            text-align: center;
-            border-bottom: 1px solid #333;
-        }
 
-        .newsletter-content h3 {
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            font-weight: 400;
-        }
+/* --- Milestone Section --- */
+.milestone-section {
+    padding: 80px 5%;
+    background-color: #fff;
+    border-bottom: 1px solid #f0f0f0; /* Subtle separator before footer */
+}
 
-        .newsletter-content p {
-            color: #999;
-            font-size: 13px;
-            margin-bottom: 25px;
-        }
+/* Centered Header (Matches your Trending Header) */
+.section-header-center {
+    text-align: center;
+    margin-bottom: 50px;
+}
 
-        .newsletter-form {
-            display: flex;
-            justify-content: center;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+.milestone-title {
+    font-family: var(--font-heading, serif);
+    font-size: 2.2rem;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+}
 
-        .newsletter-form input {
-            padding: 12px 15px;
-            width: 70%;
-            border: none;
-            border-radius: 0;
-            outline: none;
-            font-size: 13px;
-        }
+.separator-line-center {
+    width: 50px;
+    height: 2px;
+    background-color: #c5a059; /* Gold Accent */
+    margin: 0 auto 15px auto;
+}
 
-        .newsletter-form button {
-            padding: 12px 25px;
-            width: 30%;
-            background-color: #fff;
-            color: #000;
-            border: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+.milestone-subtitle {
+    font-family: var(--font-body, sans-serif);
+    color: #666;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
 
-        .newsletter-form button:hover {
-            background-color: #c5a059; /* Gold accent */
-            color: #fff;
-        }
+/* --- The Grid --- */
+.milestone-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 Equal Columns */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-        /* --- Main Footer Content --- */
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 40px;
-        }
+/* --- The Card --- */
+.milestone-card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    overflow: hidden; /* Keeps image inside border */
+    border-radius: 4px;
+}
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-        }
+/* Image Wrapper */
+.milestone-image {
+    width: 100%;
+    height: 450px; /* Tall, elegant aspect ratio */
+    position: relative;
+    overflow: hidden;
+}
 
-        .footer-col h4 {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
-            color: #fff;
-        }
+.milestone-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
 
-        .footer-col ul li {
-            margin-bottom: 12px;
-        }
+/* Hover Effect: Zoom Image */
+.milestone-card:hover .milestone-image img {
+    transform: scale(1.05);
+}
 
-        .footer-col ul li a, .contact-list li {
-            color: #999;
-            font-size: 13px;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+/* Dark Gradient Overlay for Text Readability */
+.milestone-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
 
-        .footer-col ul li a:hover {
-            color: #fff;
-            text-decoration: underline;
-        }
+.milestone-card:hover .milestone-overlay {
+    opacity: 1; /* Darkens slightly on hover */
+}
 
-        /* Contact & Socials */
-        .contact-list li i {
-            width: 20px;
-            color: #fff;
-        }
+/* Text Content (Floating over image) */
+.milestone-content {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+}
 
-        .social-icons {
-            margin-top: 20px;
-            display: flex;
-            gap: 15px;
-        }
+.milestone-content h3 {
+    font-family: var(--font-heading, serif);
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
 
-        .social-icons a {
-            color: #fff !important;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
+.milestone-content span {
+    font-family: var(--font-body, sans-serif);
+    font-size: 0.9rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.9;
+}
 
-        .social-icons a:hover {
-            color: #c5a059 !important;
-        }
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .milestone-grid {
+        grid-template-columns: 1fr; /* Stack images on mobile */
+        gap: 20px;
+    }
+    
+    .milestone-image {
+        height: 300px; /* Shorter on mobile */
+    }
+}
 
-        /* --- Bottom Bar --- */
-        .footer-bottom {
-            background-color: #000;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #222;
-        }
 
-        .copyright {
-            font-size: 11px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
 
-        .payment-icons {
-            font-size: 24px;
-            color: #666;
-            display: flex;
-            gap: 15px;
-        }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr; /* 2 cols on tablet */
-            }
-        }
+/* --- Premium Gray Footer --- */
+footer {
+    background-color: #ebebeb; /* Distinct Premium Gray */
+    color: #333333;
+    padding-top: 80px;
+    font-family: var(--font-body, sans-serif);
+    border-top: 1px solid #dbdbdb;
+}
 
-        @media (max-width: 600px) {
-            .footer-grid {
-                grid-template-columns: 1fr; /* 1 col on mobile */
-                text-align: center;
-            }
-            .newsletter-form {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .newsletter-form input, .newsletter-form button {
-                width: 100%;
-            }
-            .social-icons {
-                justify-content: center;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
+/* Container */
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5% 60px 5%;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr; 
+    gap: 50px;
+}
+
+/* --- Brand & Logo --- */
+
+.footer-logo {
+    display: inline-block; /* Keeps links behaving correctly */
+    margin-bottom: 20px;
+}
+
+.footer-logo img {
+    height: 90px; /* Adjust this number to match your header logo size */
+    width: auto;  /* Maintains aspect ratio so it doesn't stretch */
+    display: block;
+}
+
+
+.brand-tagline {
+    color: #555555; /* Slightly darker grey for better readability on this bg */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    max-width: 300px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-socials a {
+    color: #333;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.footer-socials a:hover {
+    color: #c5a059; /* Gold Hover */
+}
+
+/* --- Links --- */
+.footer-links-col h4 {
+    font-family: var(--font-heading, serif);
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: #000; /* Pure black headers for contrast */
+    letter-spacing: 0.5px;
+}
+
+.footer-links-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-links-col ul li a {
+    color: #555;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.footer-links-col ul li a:hover {
+    color: #000;
+    padding-left: 5px;
+}
+
+/* --- Newsletter --- */
+.footer-newsletter-col h4 {
+    font-family: var(--font-heading, serif);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.footer-newsletter-col p {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.footer-form {
+    position: relative;
+    border-bottom: 1px solid #999; /* Darker border to stand out on gray */
+    display: flex;
+}
+
+.footer-form input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #1a1a1a;
+    padding: 10px 0;
+    outline: none;
+    font-weight: 500;
+}
+
+.footer-form button {
+    background: transparent;
+    border: none;
+    color: #1a1a1a;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.footer-form button:hover {
+    color: #c5a059;
+}
+
+/* --- Bottom Bar (Darker Shade) --- */
+.footer-bottom {
+    border-top: 1px solid #d1d1d1;
+    background-color: #e0e0e0; /* Slightly darker than main footer */
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.footer-bottom a {
+    color: #555;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    color: #000;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 900px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+    }
+    .footer-brand-col, .footer-newsletter-col {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+        
+

@@ -4,170 +4,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>East Coast Corp | Premium Manufacturer</title>
+    <title>East Coast Corp </title>
+    <link rel="icon" href="assets/favicon.jpg" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-    <style>
-    </style>
 </head>
 
 <body>
 
     <div class="top-bar-premium">
-        Limited Time: Enjoy 20% Off Your First Order Use Code: <span class="promo-highlight">ECCVIP20</span>
+        Just Dropped: Explore The <span class="promo-highlight">ALL-NEW PREMIUM COLLECTION</span> Today.
     </div>
 
-    <header>
-        <div class="header-main">
-            <div class="search-container">
-                <div class="search-input-wrapper">
-                    <input type="text" id="search-input" placeholder="Search for anything here...">
-                    <i class="fas fa-search"></i>
-                </div>
-            </div>
-            <div class="mobile-menu-icon">
-                <i class="fas fa-bars"></i>
-            </div>
-            <a href="#" class="logo">
-               <img src="assets/ecc-logo.png" alt="East Coast Corp">
-            </a>
-            <div class="header-actions">
-                <a href="#" class="icon-link"><i class="far fa-heart"></i></a>
-                <a href="#" class="icon-link"><i class="far fa-user"></i></a>
-                <a href="#" class="icon-link"><i class="fas fa-shopping-bag"></i></a>
-                <button class="checkout-btn">Checkout</button>
+<header>
+    <div class="header-main" style="position: relative; z-index: 1002; background: #fff;">
+        
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <input type="text" id="search-input" placeholder="Search...">
+                <i class="fas fa-search"></i>
             </div>
         </div>
-        <nav class="nav-bar">
-            <ul class="nav-links">
-                <li><a href="#" class="highlight-gold">New In</a></li>
-                <li><a href="#">Baby Girl</a></li>
-                <li><a href="#">Baby Boy</a></li>
-                <li><a href="#">Rompers</a></li>
-                <li><a href="#">Swaddles</a></li>
-                <li><a href="#">Bedding</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">Private Label</a></li>
-                <li><a href="#" class="highlight-red">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section class="hero-section">
-        <img src="assets/main-hero.jpg" alt="Autumn Baby Collection" class="hero-bg">
+        <div class="mobile-menu-icon" onclick="toggleMenu()" style="cursor: pointer; padding: 10px; z-index: 1003;">
+            <i class="fas fa-bars" id="menu-icon" style="font-size: 24px; color: #000;"></i>
+        </div>
+
+        <a href="#" class="logo">
+           <img src="assets/ecc-logo.png" alt="East Coast Corp">
+        </a>
+
+        <div class="header-actions">
+            <a href="#" class="icon-link"><i class="far fa-heart"></i></a>
+            <a href="#" class="icon-link"><i class="far fa-user"></i></a>
+            <a href="#" class="icon-link"><i class="fas fa-shopping-bag"></i></a>
+        </div>
+    </div>
+
+    <nav class="nav-bar" id="mobile-nav" >
+        <ul class="nav-links">
+            <li><a href="#hero" class="highlight-gold">Home</a></li>
+            <li><a href="#Collection">Our Collection</a></li>
+            <li><a href="#Trends">Trending</a></li>
+            <li><a href="#about-east">About</a></li>
+            <li><a href="#footer" class="highlight-red">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+    <section class="hero-section" id="hero">
+        <img src="assets/hero-2.jpg" alt="Autumn Baby Collection" class="hero-bg">
 
         <div class="hero-text-overlay">
-            <h1>The Organic Edit</h1>
-            <a href="#" class="hero-shop-btn">Shop Now</a>
+            <h1></h1>
+            <a href="https://ponnshankarclothing.trustpass.alibaba.com/" class="hero-shop-btn">Shop Now</a>
         </div>
     </section>
 
 
-    <section class="category-slider-section">
-        <h2 class="slider-title">The Collection</h2>
+    <section class="category-slider-section" id="Collection">
+        <h2 class="collection-header">OUR COLLECTION</h2>
+            <div class="slider-container">
+                  <div class="slider-track">
 
-        <div class="slider-container">
-            <div class="slider-track">
+                    <div class="slide-item">
+                        <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Bibs" target="_blank" class="slide-link">
+                            <div class="img-circle">
+                                <img src="assets/products/baby-bibs.jpg" alt="Bibs"> 
+                            </div>
+                            <span class="slide-label">Bibs</span>
+                        </a>
+                    </div>
 
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Sleepsuits">
+                    <div class="slide-item">
+                        <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Bodysuits" target="_blank" class="slide-link">
+                            <div class="img-circle">
+                                <img src="assets/products/bodysuit.jpg" alt="Bodysuits">
+                            </div>
+                            <span class="slide-label">Bodysuits</span>
+                        </a>
                     </div>
-                    <span class="slide-label">Sleepsuits</span>
-                </div>
 
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Bodysuits">
+                    <div class="slide-item">
+                        <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Romper" target="_blank" class="slide-link">
+                            <div class="img-circle">
+                                <img src="assets/products/Romper.jpg" alt="Rompersuits">
+                            </div>
+                            <span class="slide-label">Romper</span>
+                        </a>
                     </div>
-                    <span class="slide-label">Bodysuits</span>
-                </div>
 
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Rompersuits">
+                    <div class="slide-item">
+                        <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Crib%20Sheet" target="_blank" class="slide-link">
+                            <div class="img-circle">
+                                <img src="assets/products/Crib-Sheet.jpg" alt="Crib Sheet">
+                            </div>
+                            <span class="slide-label">Crib Sheet</span>
+                        </a>
                     </div>
-                    <span class="slide-label">Rompersuits</span>
-                </div>
 
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Sets & Outfits">
+                    <div class="slide-item">
+                        <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Burp%20Cloth" target="_blank" class="slide-link">
+                            <div class="img-circle">
+                                <img src="assets/products/Baby-Burp-Cloth.jpg" alt="Buro Cloth">
+                            </div>
+                            <span class="slide-label">Burp Cloth</span>
+                        </a>
                     </div>
-                    <span class="slide-label">Sets & Outfits</span>
-                </div>
 
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Socks">
+                    <div class="slide-item">
+                        <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Nursing%20Pad" target="_blank" class="slide-link">
+                            <div class="img-circle">
+                                <img src="assets/products/Nursing-Pads.jpg" alt="Nursing Pads">
+                            </div>
+                            <span class="slide-label">Nursing Pad</span>
+                        </a>
                     </div>
-                    <span class="slide-label">Socks</span>
-                </div>
 
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Hats & Mittens">
+                    <div class="slide-item">
+                        <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Booties" target="_blank" class="slide-link">
+                            <div class="img-circle">
+                                <img src="assets/products/Booties.jpg" alt="Booties">
+                            </div>
+                            <span class="slide-label">Booties</span>
+                        </a>
                     </div>
-                    <span class="slide-label">Hats & Mittens</span>
-                </div>
 
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Cardigans">
+                    <div class="slide-item">
+                        <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Sleeping%20Bag" target="_blank" class="slide-link">
+                            <div class="img-circle">
+                                <img src="assets/products/Baby-Sleeping-Bag.jpg" alt="Sleeping Bag">
+                            </div>
+                            <span class="slide-label">Sleeping Bag</span>
+                        </a>
                     </div>
-                    <span class="slide-label">Cardigans</span>
-                </div>
 
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Sleepsuits">
+                    <div class="slide-item">
+                        <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Pajamas" target="_blank" class="slide-link">
+                            <div class="img-circle">
+                                <img src="assets/products/Baby-Pajamas.jpg" alt="Pajamas">
+                            </div>
+                            <span class="slide-label">Pajamas</span>
+                        </a>
                     </div>
-                    <span class="slide-label">Sleepsuits</span>
-                </div>
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Bodysuits">
-                    </div>
-                    <span class="slide-label">Bodysuits</span>
-                </div>
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Rompersuits">
-                    </div>
-                    <span class="slide-label">Rompersuits</span>
-                </div>
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Sets & Outfits">
-                    </div>
-                    <span class="slide-label">Sets & Outfits</span>
-                </div>
-                <div class="slide-item">
-                    <div class="img-circle">
-                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                            alt="Socks">
-                    </div>
-                    <span class="slide-label">Socks</span>
-                </div>
 
+                    <div class="slide-item">
+                        <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Diapering" target="_blank" class="slide-link">
+                            <div class="img-circle">
+                                <img src="assets/products/baby-diapering.jpg" alt="Diapering">
+                            </div>
+                            <span class="slide-label">Diapering </span>
+                        </a>
+                    </div>
+
+                </div>
             </div>
-        </div>
     </section>
 
 
 
-    <section class="editorial-section">
+    <section class="editorial-section" id="about-east">
         <div class="editorial-container">
 
             <div class="editorial-content">
@@ -182,9 +179,9 @@
                     manufacture garments; we engineer comfort.
                 </p>
                 <p class="story-text">
-                    From sourcing the purest organic cotton to our ISO-certified finishing processes, every romper,
-                    swaddle, and mitten is a testament to our obsession with quality. We are the silent partner behind
-                    premium global brands, dedicated to sustainability and the art of soft living.
+                        From sourcing the purest organic cotton to our ISO-certified finishing processes, every romper,
+                            swaddle, and mitten is a testament to our obsession with quality. We are wholly dedicated to
+                            sustainability and the art of soft living.
                 </p>
 
                 <div class="signature-block">
@@ -192,7 +189,7 @@
                     <p class="signature-script">East Coast Corp.</p>
                 </div>
 
-                <a href="#" class="read-more-link">Read Our Full Story</a>
+                <a href="https://ponnshankarclothing.trustpass.alibaba.com/company_profile.html?spm=a2700.shop_pl.88.43.90f067eakHuxX3" class="read-more-link">Read Our Full Story</a>
             </div>
 
             <div class="editorial-image-wrapper">
@@ -205,7 +202,7 @@
 
 
 
-    <section class="trending-section">
+    <section class="trending-section" id="Trends">
         <div class="section-header-center">
             <h2 class="trending-title">Trending Now</h2>
             <p class="trending-subtitle">This week's most loved essentials.</p>
@@ -217,31 +214,38 @@
                 <div class="product-image-wrapper">
                     <span class="badge new">New</span>
                     <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                    <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                        alt="Organic Romper">
-                    <button class="quick-add-btn">Add to Bag</button>
+                    <img src="assets/products/Dungaree.jpg"
+                        alt="Dungaree">
+                    <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Dungaree" target="_blank" class="quick-add-btn">
+                          Add to Bag     
+                      </a>
                 </div>
                 <div class="product-details">
-                    <h3 class="product-name">Organic Cotton Romper</h3>
-                    <p class="product-price">$24.00</p>
+                    <h3 class="product-name">Dungaree</h3>
+                  <!-- <p class="product-price">$$$$</p> -->
                     <div class="color-options">
                         <span class="color-dot" style="background-color: #e0dcd5;"></span>
                         <span class="color-dot" style="background-color: #a8b0ba;"></span>
+                        <span class="color-dot" style="background-color: #f7c6c5;"></span>
+                        <span class="color-dot" style="background-color: #333;"></span>
+
                     </div>
                 </div>
             </div>
 
-            <div class="product-card">
+            <div class="product-card" >
                 <div class="product-image-wrapper">
                     <span class="badge best-seller">Best Seller</span>
                     <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                    <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                    <img src="assets/products/swaddle-wrap.jpg"
                         alt="Knit Cardigan">
-                    <button class="quick-add-btn">Add to Bag</button>
+                    <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Swaddle%20Wrap" target="_blank" class="quick-add-btn">
+                          Add to Bag     
+                      </a>
                 </div>
                 <div class="product-details">
-                    <h3 class="product-name">Heritage Knit Cardigan</h3>
-                    <p class="product-price">$32.00</p>
+                    <h3 class="product-name">Swaddle Wrap</h3>
+                   <!-- <p class="product-price">$$$$</p> -->
                     <div class="color-options">
                         <span class="color-dot" style="background-color: #8c7b70;"></span>
                         <span class="color-dot" style="background-color: #333;"></span>
@@ -252,13 +256,15 @@
             <div class="product-card">
                 <div class="product-image-wrapper">
                     <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                    <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
-                        alt="Muslin Swaddle">
-                    <button class="quick-add-btn">Add to Bag</button>
+                    <img src="assets/products/Baby-Onesie.jpg"
+                        alt="Onesie">
+                       <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Onesie" target="_blank" class="quick-add-btn">
+                          Add to Bag     
+                      </a>
                 </div>
                 <div class="product-details">
-                    <h3 class="product-name">Bamboo Muslin Swaddle</h3>
-                    <p class="product-price">$18.00</p>
+                    <h3 class="product-name">Onesie</h3>
+                   <!-- <p class="product-price">$$$$</p> -->
                     <div class="color-options">
                         <span class="color-dot" style="background-color: #fff; border:1px solid #ddd;"></span>
                         <span class="color-dot" style="background-color: #ffcccc;"></span>
@@ -269,15 +275,18 @@
             <div class="product-card">
                 <div class="product-image-wrapper">
                     <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                    <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"
+                    <img src="assets/products/Baby-two-piece-Pajamas.jpg"
                         alt="Booties">
-                    <button class="quick-add-btn">Add to Bag</button>
+                       <a href="https://ponnshankarclothing.trustpass.alibaba.com/search/product?SearchText=Onesie" target="_blank" class="quick-add-btn">
+                          Add to Bag     
+                      </a>
                 </div>
                 <div class="product-details">
-                    <h3 class="product-name">Soft Sole Booties</h3>
-                    <p class="product-price">$14.50</p>
+                    <h3 class="product-name">Two Piece Pajamas</h3>
+                   <!-- <p class="product-price">$$$$</p> -->
                     <div class="color-options">
                         <span class="color-dot" style="background-color: #d2b48c;"></span>
+                        <span class="color-dot" style="background-color: #a9a9a9;"></span>
                     </div>
                 </div>
             </div>
@@ -285,90 +294,143 @@
         </div>
 
         <div class="view-all-container">
-            <a href="#" class="view-all-btn">View All Products</a>
+            <a href="https://ponnshankarclothing.trustpass.alibaba.com/productlist.html?spm=a2700.shop_index.88.15.4a69465cqtNqNN" class="view-all-btn">View All Products</a>
         </div>
     </section>
 
 
 
-    <footer>
 
-        <div class="newsletter-strip">
-            <div class="newsletter-content">
-                <h3>Join the Family</h3>
-                <p>Sign up for exclusive offers, original stories, and more.</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address" required>
-                    <button type="submit">Subscribe</button>
-                </form>
+
+<section class="milestone-section" id="milestone">
+    <div class="section-header-center">
+        <h2 class="milestone-title">Curated for Every Milestone</h2>
+        <div class="separator-line-center"></div>
+        <p class="milestone-subtitle">Essentials designed to grow with them.</p>
+    </div>
+
+    <div class="milestone-grid">
+        
+        <a href="#" class="milestone-card">
+            <div class="milestone-image">
+                <img src="assets/0-to-6-month.jpg" alt="Newborn Baby">
+                <div class="milestone-overlay"></div>
+            </div>
+            <div class="milestone-content">
+                <h3>The Arrival</h3>
+                <span>0 – 6 Months</span>
+            </div>
+        </a>
+
+        <a href="#" class="milestone-card">
+            <div class="milestone-image">
+                <img src="assets/6-to-12-month.jpg" alt="Crawling Baby">
+                <div class="milestone-overlay"></div>
+            </div>
+            <div class="milestone-content">
+                <h3>The Discovery</h3>
+                <span>6 – 12 Months</span>
+            </div>
+        </a>
+
+        <a href="#" class="milestone-card">
+            <div class="milestone-image">
+                <img src="assets/12-to-24-month.jpg" alt="Toddler Walking">
+                <div class="milestone-overlay"></div>
+            </div>
+            <div class="milestone-content">
+                <h3>The Adventure</h3>
+                <span>12 – 24 Months</span>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<footer id="footer" class="reveal-section">
+    <div class="footer-container">
+        
+        <div class="footer-brand-col">
+            <a href="#" class="footer-logo">
+            <img src="assets/ecc-logo.png" alt="East Coast Corp">
+            </a>
+            <p class="brand-tagline">Premium essentials for your little one's new beginning.</p>
+            
+            <div class="footer-socials">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
             </div>
         </div>
 
-        <div class="footer-container">
-            <div class="footer-grid">
-
-                <div class="footer-col">
-                    <h4>Help & Support</h4>
-                    <ul>
-                        <li><a href="#">Shipping & Delivery</a></li>
-                        <li><a href="#">Returns & Refunds</a></li>
-                        <li><a href="#">Size Guide</a></li>
-                        <li><a href="#">Track My Order</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>The Company</h4>
-                    <ul>
-                        <li><a href="#">About East Coast Corp</a></li>
-                        <li><a href="#">Sustainability</a></li>
-                        <li><a href="#">Factory Tour</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Press</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Legal & Privacy</h4>
-                    <ul>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">Accessibility</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Contact Us</h4>
-                    <ul class="contact-list">
-                        <li><i class="fas fa-map-marker-alt"></i> Tiruppur, Tamil Nadu, India</li>
-                        <li><i class="fas fa-envelope"></i> info@eastcoastcorp.com</li>
-                        <li><i class="fas fa-phone"></i> +91 421 123 4567</li>
-                        <li class="social-icons">
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
+        <div class="footer-links-col">
+            <h4>Shop</h4>
+            <ul>
+                <li><a href="#">New Arrivals</a></li>
+                <li><a href="#">Best Seller</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Organic Sets</a></li>
+                <li><a href="#">Gift Cards</a></li>
+            </ul>
         </div>
 
-        <div class="footer-bottom">
-            <div class="copyright">
-                &copy; 2025 East Coast Corp. All Rights Reserved.
-            </div>
-            <div class="payment-icons">
-                <i class="fab fa-cc-visa"></i>
-                <i class="fab fa-cc-mastercard"></i>
-                <i class="fab fa-cc-amex"></i>
-                <i class="fab fa-cc-paypal"></i>
-            </div>
+        <div class="footer-links-col">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="#">Track Order</a></li>
+                <li><a href="#">Shipping & Returns</a></li>
+                <li><a href="#">Size Guide</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
         </div>
-    </footer>
+
+        <div class="footer-newsletter-col">
+            <h4>The Family List</h4>
+            <p>Subscribe for a special welcome gift on your first order and priority access to new collections..</p>
+            
+            <form class="footer-form">
+                <input type="email" placeholder="Email Address" required>
+                <button type="submit">→</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <div class="copyright">
+            &copy; 2025 East Coast Corp. <a href="#">Privacy</a> &nbsp;|&nbsp; <a href="#">Terms</a>
+        </div>
+        <div class="payment-icons">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+
+    function toggleMenu() {
+        // 1. Get the menu and the icon
+        var menu = document.getElementById('mobile-nav');
+        var icon = document.getElementById('menu-icon');
+
+        // 2. Toggle the class 'active'
+        menu.classList.toggle('active');
+
+        // 3. Switch the Icon look
+        if (menu.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    }
+
+</script>
 
 </body>
-
 </html>
