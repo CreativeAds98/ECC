@@ -294,7 +294,7 @@
         </div>
 
         <div class="view-all-container">
-            <a href="https://ponnshankarclothing.trustpass.alibaba.com/productlist.html?spm=a2700.shop_index.88.15.4a69465cqtNqNN" class="view-all-btn">View All Products</a>
+            <a href="https://ponnshankarclothing.trustpass.alibaba.com/productlist.html?spm=a2700.shop_index.88.15.4a69465cqtNqNN" class="view-all-btn" target="_blank">View All Products</a>
         </div>
     </section>
 
@@ -351,7 +351,7 @@
     <div class="footer-container">
         
         <div class="footer-brand-col">
-            <a href="#" class="footer-logo">
+            <a href="index.html" class="footer-logo">
             <img src="assets/ecc-logo.png" alt="East Coast Corp">
             </a>
             <p class="brand-tagline">Premium essentials for your little one's new beginning.</p>
@@ -448,6 +448,15 @@
         });
     });
 </script>
-
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const track = document.querySelector(".slider-track");
+        
+        // This duplicates all the items inside the track.
+        // Original: [A, B, C] -> New: [A, B, C, A, B, C]
+        // This allows the animation to scroll halfway and snap back instantly.
+        track.innerHTML += track.innerHTML;
+    });
+</script> 
 </body>
 </html>

@@ -286,112 +286,134 @@
 
 
 
-        /* Section Background */
-        .category-slider-section {
-            padding: 60px 0;
-            background-color: #f9f9f9; /* Subtle light grey background for contrast */
-            overflow: hidden; /* Hides the scrollbar */
-        }
+      /* --- Collection Section --- */
+.category-slider-section {
+    padding: 60px 0;
+    background-color: #f9f9f9; /* Subtle light grey background */
+    overflow: hidden; /* Hides the scrollbar */
+}
 
-        .slider-title {
-            text-align: left;
-            padding-left: 5%;
-            font-size: 20px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 40px;
-            color: #111;
-        }
+/* --- Centered Header with Gold Underline --- */
+/* (Renamed from .slider-title to match your HTML) */
+.collection-header {
+    text-align: center;
+    font-family: var(--font-heading, serif);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    color: #1a1a1a;
+    position: relative;
+}
 
-        /* The scrolling container */
-        .slider-container {
-            width: 100%;
-            position: relative;
-        }
+/* The Gold Line */
+.collection-header::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #c5a059;
+    margin: 20px auto 0 auto;
+}
 
-        /* The moving track */
-        .slider-track {
-            display: flex;
-            gap: 50px; /* Space between circles */
-            width: calc(250px * 12); /* Adjust based on item count */
-            animation: scroll 40s linear infinite; /* The Slow Slide Effect */
-            padding-left: 50px;
-        }
+/* --- The Scrolling Container --- */
+.slider-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
 
-        /* Individual Item */
-        .slide-item {
-            width: 180px; /* Circle Size */
-            flex-shrink: 0;
-            text-align: center;
-            cursor: pointer;
-        }
+/* --- The Infinite Track --- */
+.slider-track {
+    display: inline-flex; /* Keeps items in a long line */
+    gap: 50px;            /* Space between circles */
+    width: max-content;   /* Automatically fits all items */
+    animation: scroll 40s linear infinite; /* Infinite Scroll */
+    padding-left: 50px;   /* Initial padding */
+}
 
-        /* Circle Wrapper */
-        .img-circle {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            overflow: hidden; /* Keeps the image inside the circle during zoom */
-            background: #fff;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Very subtle premium shadow */
-            transition: box-shadow 0.3s ease;
-        }
+/* --- Individual Item --- */
+.slide-item {
+    width: 180px;
+    flex-shrink: 0;
+    text-align: center;
+    cursor: pointer;
+}
 
-        /* Image styling */
-        .img-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth premium zoom */
-        }
+/* Link Reset */
+.slide-link {
+    text-decoration: none;
+}
 
-        /* Text Label */
-        .slide-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #333;
-            transition: color 0.3s ease;
-        }
+/* --- Circle Wrapper (Your Premium Styles) --- */
+.img-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #fff;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+}
 
-        /* --- HOVER EFFECTS --- */
+/* --- Image Styling --- */
+.img-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Your smooth premium zoom transition */
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+}
 
-        /* 1. Pause scrolling when user hovers over the track */
-        .slider-track:hover {
-            animation-play-state: paused;
-        }
+/* --- Text Label --- */
+.slide-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #333;
+    transition: color 0.3s ease;
+}
 
-        /* 2. Zoom image on item hover */
-        .slide-item:hover .img-circle img {
-            transform: scale(1.15); /* Zoom in */
-        }
+/* --- HOVER EFFECTS --- */
 
-        /* 3. Add shadow on item hover */
-        .slide-item:hover .img-circle {
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
+/* 1. Pause scrolling on hover */
+.slider-track:hover {
+    animation-play-state: paused;
+}
 
-        /* 4. Change text color on item hover */
-        .slide-item:hover .slide-label {
-            color: #c5a059; /* Gold accent color */
-        }
+/* 2. Zoom image */
+.slide-item:hover .img-circle img {
+    transform: scale(1.15);
+}
 
-        /* Animation Keyframes */
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-180px * 7 - 50px * 7)); } /* Calculate based on item width + gap */
-        }
+/* 3. Shadow depth */
+.slide-item:hover .img-circle {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .slide-item { width: 140px; }
-            .img-circle { width: 140px; height: 140px; }
-            .slider-track { gap: 30px; }
-        }
+/* 4. Gold Text */
+.slide-item:hover .slide-label {
+    color: #c5a059;
+}
+
+/* --- Animation Logic --- */
+/* Moves left by 50% (Requires the JS duplication script) */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .collection-header { font-size: 2rem; }
+    .slide-item { width: 140px; }
+    .img-circle { width: 140px; height: 140px; }
+    .slider-track { gap: 30px; }
+}
 
 
 
