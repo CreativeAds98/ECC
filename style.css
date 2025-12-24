@@ -394,7 +394,14 @@
         }
 
 
-                    /* --- Collection Header Style --- */
+
+
+
+
+
+
+
+        /* --- Collection Header Style --- */
             .collection-header {
                 text-align: center;              /* Centers the text */
                 font-family: var(--font-heading, serif); /* Uses your premium font */

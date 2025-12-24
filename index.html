@@ -410,17 +410,15 @@
 </footer>
 
 <script src="script.js"></script>
-<script>
 
+<script>
+    // 1. The Toggle Function (Opens/Closes menu on button click)
     function toggleMenu() {
-        // 1. Get the menu and the icon
         var menu = document.getElementById('mobile-nav');
         var icon = document.getElementById('menu-icon');
 
-        // 2. Toggle the class 'active'
         menu.classList.toggle('active');
 
-        // 3. Switch the Icon look
         if (menu.classList.contains('active')) {
             icon.classList.remove('fa-bars');
             icon.classList.add('fa-times');
@@ -430,6 +428,25 @@
         }
     }
 
+    // 2. The Auto-Close Function (Closes menu when a Link is clicked)
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select all links inside the mobile menu
+        var links = document.querySelectorAll('#mobile-nav a');
+        var menu = document.getElementById('mobile-nav');
+        var icon = document.getElementById('menu-icon');
+
+        // Add a click event to every link
+        links.forEach(function(link) {
+            link.addEventListener('click', function() {
+                // Remove the active class (Close the menu)
+                menu.classList.remove('active');
+                
+                // Reset the icon back to 'Bars'
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+    });
 </script>
 
 </body>
