@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baby Collection | East Coast Corp</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+   
+
+        /* --- CATEGORY PAGE STYLES --- */
+        .category-page-wrapper {
+            background-color: #efece1; /* Beige Background */
+            min-height: 100vh;
+            padding-top: 140px;
+            padding-bottom: 80px;
+        }
+
+        .category-title {
+            text-align: center;
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            color: #5d5f38;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 60px;
+            padding-top: 20px;
+        }
+
+        .product-grid-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .product-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 220px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .product-item:hover { transform: translateY(-5px); }
+
+        .img-circle-wrapper {
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .product-img {
+            width: 85%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .p-code {
+            color: #8c8c60;
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            font-family: serif;
+        }
+
+        .p-name {
+            color: #5d5f38;
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.3;
+        }
+
+        /* --- MODAL POPUP STYLES (UPDATED FOR GALLERY) --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-content {
+            background-color: white;
+            width: 100%;
+            max-width: 1000px; /* Made slightly wider for gallery */
+            height: auto;
+            max-height: 90vh;
+            border-radius: 12px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr; /* Image side slightly larger */
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        /* Left Side: Main Image + Thumbnails */
+        .modal-left-column {
+            background-color: #f9f9f9;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-image-container {
+            width: 100%;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s;
+        }
+
+        /* Thumbnail Strip */
+        .modal-gallery-strip {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .modal-thumb {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .modal-thumb:hover, .modal-thumb.active {
+            opacity: 1;
+            border-color: #5d5f38;
+            transform: scale(1.05);
+        }
+
+        /* Right Side: Details */
+        .modal-details {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .modal-code {
+            color: #8c8c60;
+            font-family: serif;
+            font-style: italic;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .modal-title {
+            color: #5d5f38;
+            font-size: 2rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+        }
+
+        .modal-desc {
+            color: #555;
+            line-height: 1.8; /* Increased line height for readability */
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .modal-btn {
+            background-color: #5d5f38;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: fit-content;
+        }
+
+        .modal-btn:hover { background-color: #3e4026; }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #aaa;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .close-btn:hover { color: #333; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .nav-bar { display: none; }
+            .nav-bar.active { display: block; position: absolute; top: 80px; left: 0; width: 100%; height: auto; padding-bottom: 20px; border-bottom: 1px solid #ddd; z-index: 1001; }
+            .nav-links { flex-direction: column; gap: 15px; }
+            .mobile-menu-icon { display: block; }
+            .category-title { font-size: 1.8rem; margin-bottom: 40px; }
+            
+            /* Modal Responsive */
+            .modal-content { grid-template-columns: 1fr; max-height: 85vh; overflow-y: scroll; }
+            .modal-left-column { padding: 15px; }
+            .modal-image-container { height: 250px; }
+            .modal-details { padding: 25px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-main" style="position: relative; z-index: 1002; background: #fff;">
+        
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <input type="text" id="search-input" placeholder="Search...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+
+        <div class="mobile-menu-icon" onclick="toggleMenu()" style="cursor: pointer; padding: 10px; z-index: 1003;">
+            <i class="fas fa-bars" id="menu-icon" style="font-size: 24px; color: #000;"></i>
+        </div>
+
+        <a href="index.html" class="logo">
+           <img src="assets/ecc-logo.png" alt="East Coast Corp">
+        </a>
+
+        <div class="header-actions">
+            <a href="#" class="icon-link"><i class="far fa-heart"></i></a>
+            <a href="#" class="icon-link"><i class="far fa-user"></i></a>
+            <a href="#" class="icon-link"><i class="fas fa-shopping-bag"></i></a>
+        </div>
+    </div>
+
+    <nav class="nav-bar" id="mobile-nav" >
+        <ul class="nav-links">
+            <li><a href="#hero" class="highlight-gold">Home</a></li>
+            <li><a href="#Collection">Our Collection</a></li>
+            <li><a href="#Trends">Trending</a></li>
+            <li><a href="#about-east">About</a></li>
+            <li><a href="#footer" class="highlight-red">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="category-page-wrapper">
+    
+    <div id="sleeping"></div>
+    <h1 class="category-title">Baby Sleeping</h1>
+    <div class="product-grid-container">
+        <div class="product-item" onclick="openModal('AC-001')">
+            <div class="img-circle-wrapper"><img src="assets/productspages/sleeping bag/1.jpg" class="product-img"></div>
+            <div class="p-code">AC - 001</div>
+            <div class="p-name">Sleeping Bag Tog 0.5</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-002')">
+            <div class="img-circle-wrapper"><img src="assets/productspages/sleeping bag/2.jpg" class="product-img"></div>
+            <div class="p-code">AC - 002</div>
+            <div class="p-name">Sleeping Bag Tog 1.5</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-003')">
+            <div class="img-circle-wrapper"><img src="assets/productspages/sleeping bag/3.jpg" class="product-img"></div>
+            <div class="p-code">AC - 003</div>
+            <div class="p-name">Sleeping Bag Tog 2.5</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-004')">
+            <div class="img-circle-wrapper"><img src="assets/productspages/sleeping bag/3.jpg" class="product-img"></div>
+            <div class="p-code">AC - 004</div>
+            <div class="p-name">Sleeping Bag Tog 3.5</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-005')">
+            <div class="img-circle-wrapper"><img src="assets/productspages/Swaddle/1.jpg class="product-img"></div>
+            <div class="p-code">AC - 005</div>
+            <div class="p-name">Adjustable Swaddle Wrap</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-006')">
+            <div class="img-circle-wrapper"><img src="assets/productspages/" class="product-img"></div>
+            <div class="p-code">AC - 006</div>
+            <div class="p-name">Knotted Swaddle Wrap</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-007')">
+            <div class="img-circle-wrapper"><img src="assets/products/quilt.jpg" class="product-img"></div>
+            <div class="p-code">AC - 007</div>
+            <div class="p-name">Quilt Blanket</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-008')">
+            <div class="img-circle-wrapper"><img src="assets/products/cocoon.jpg" class="product-img"></div>
+            <div class="p-code">AC - 008</div>
+            <div class="p-name">Cocoon Swaddle</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-009')">
+            <div class="img-circle-wrapper"><img src="assets/products/muslin.jpg" class="product-img"></div>
+            <div class="p-code">AC - 009</div>
+            <div class="p-name">Muslin Swaddle Blanket</div>
+        </div>
+    </div>
+
+    <div id="bedding"></div>
+    <h1 class="category-title">Baby Bedding</h1>
+    <div class="product-grid-container">
+        <div class="product-item" onclick="openModal('AC-010')">
+            <div class="img-circle-wrapper"><img src="assets/productspages/Crib Sheet/1.jpg" class="product-img"></div>
+            <div class="p-code">AC - 010</div>
+            <div class="p-name">Crib Sheet</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-011')">
+            <div class="img-circle-wrapper"><img src="assets/products/bassinet-sheet.jpg" class="product-img"></div>
+            <div class="p-code">AC - 011</div>
+            <div class="p-name">Bassinet Sheet</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-012')">
+            <div class="img-circle-wrapper"><img src="assets/products/bed-sheet.jpg" class="product-img"></div>
+            <div class="p-code">AC - 012</div>
+            <div class="p-name">Bed Sheet</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-013')">
+            <div class="img-circle-wrapper"><img src="assets/products/duvet-cover.jpg" class="product-img"></div>
+            <div class="p-code">AC - 013</div>
+            <div class="p-name">Duvet Cover</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-014')">
+            <div class="img-circle-wrapper"><img src="assets/products/pillow-cover.jpg" class="product-img"></div>
+            <div class="p-code">AC - 014</div>
+            <div class="p-name">Pillow Cover</div>
+        </div>
+    </div>
+
+    <div id="apparel"></div>
+    <h1 class="category-title">Baby Apparel</h1>
+    <div class="product-grid-container">
+        <div class="product-item" onclick="openModal('AC-015')">
+            <div class="img-circle-wrapper"><img src="assets/productspages/onesie/16.jpg" class="product-img"></div>
+            <div class="p-code">AC - 015</div>
+            <div class="p-name">Onesie</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-016')">
+            <div class="img-circle-wrapper"><img src="assets/productspages/Romper/1.jpg" class="product-img"></div>
+            <div class="p-code">AC - 016</div>
+            <div class="p-name">Rompers</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-017')">
+            <div class="img-circle-wrapper"><img src="assets/products/bodysuit.jpg" class="product-img"></div>
+            <div class="p-code">AC - 017</div>
+            <div class="p-name">Bodysuit</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-018')">
+            <div class="img-circle-wrapper"><img src="assets/products/pajamas.jpg" class="product-img"></div>
+            <div class="p-code">AC - 018</div>
+            <div class="p-name">Two-Piece Pajamas</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-019')">
+            <div class="img-circle-wrapper"><img src="assets/products/leggings.jpg" class="product-img"></div>
+            <div class="p-code">AC - 019</div>
+            <div class="p-name">Leggings</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-020')">
+            <div class="img-circle-wrapper"><img src="assets/products/tshirt.jpg" class="product-img"></div>
+            <div class="p-code">AC - 020</div>
+            <div class="p-name">T-Shirt</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-021')">
+            <div class="img-circle-wrapper"><img src="assets/products/swimsuit.jpg" class="product-img"></div>
+            <div class="p-code">AC - 021</div>
+            <div class="p-name">Swimsuit</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-022')">
+            <div class="img-circle-wrapper"><img src="assets/products/sweatshirt.jpg" class="product-img"></div>
+            <div class="p-code">AC - 022</div>
+            <div class="p-name">Sweat Shirt</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-023')">
+            <div class="img-circle-wrapper"><img src="assets/products/sweatpants.jpg" class="product-img"></div>
+            <div class="p-code">AC - 023</div>
+            <div class="p-name">Sweat Pants</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-024')">
+            <div class="img-circle-wrapper"><img src="assets/products/gown.jpg" class="product-img"></div>
+            <div class="p-code">AC - 024</div>
+            <div class="p-name">Baby Gown</div>
+        </div>
+    </div>
+
+    <div id="diapering"></div>
+    <h1 class="category-title">Baby Diapering</h1>
+    <div class="product-grid-container">
+        <div class="product-item" onclick="openModal('AC-025')">
+            <div class="img-circle-wrapper"><img src="assets/products/pad-cover.jpg" class="product-img"></div>
+            <div class="p-code">AC - 025</div>
+            <div class="p-name">Changing Pad Cover</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-026')">
+            <div class="img-circle-wrapper"><img src="assets/products/changing-mat.jpg" class="product-img"></div>
+            <div class="p-code">AC - 026</div>
+            <div class="p-name">Diaper Changing Mat</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-027')">
+            <div class="img-circle-wrapper"><img src="assets/products/cloth-diaper.jpg" class="product-img"></div>
+            <div class="p-code">AC - 027</div>
+            <div class="p-name">Cloth Diaper</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-028')">
+            <div class="img-circle-wrapper"><img src="assets/products/diaper-inserts.jpg" class="product-img"></div>
+            <div class="p-code">AC - 028</div>
+            <div class="p-name">Diaper Inserts</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-029')">
+            <div class="img-circle-wrapper"><img src="assets/products/pre-fold.jpg" class="product-img"></div>
+            <div class="p-code">AC - 029</div>
+            <div class="p-name">Pre-Fold</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-030')">
+            <div class="img-circle-wrapper"><img src="assets/products/sanitary-pads.jpg" class="product-img"></div>
+            <div class="p-code">AC - 030</div>
+            <div class="p-name">Sanitary Pads</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-031')">
+            <div class="img-circle-wrapper"><img src="assets/products/training-pants.jpg" class="product-img"></div>
+            <div class="p-code">AC - 031</div>
+            <div class="p-name">Training Pants</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-032')">
+            <div class="img-circle-wrapper"><img src="assets/products/wet-bags.jpg" class="product-img"></div>
+            <div class="p-code">AC - 032</div>
+            <div class="p-name">Wet Bags</div>
+        </div>
+    </div>
+
+    <div id="accessories"></div>
+    <h1 class="category-title">Baby Accessories</h1>
+    <div class="product-grid-container">
+        <div class="product-item" onclick="openModal('AC-033')">
+            <div class="img-circle-wrapper"><img src="assets/products/mittens.jpg" class="product-img"></div>
+            <div class="p-code">AC - 033</div>
+            <div class="p-name">Mittens</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-034')">
+            <div class="img-circle-wrapper"><img src="assets/products/bonnets.jpg" class="product-img"></div>
+            <div class="p-code">AC - 034</div>
+            <div class="p-name">Bonnets</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-035')">
+            <div class="img-circle-wrapper"><img src="assets/products/booties.jpg" class="product-img"></div>
+            <div class="p-code">AC - 035</div>
+            <div class="p-name">Booties</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-036')">
+            <div class="img-circle-wrapper"><img src="assets/products/knot-hat.jpg" class="product-img"></div>
+            <div class="p-code">AC - 036</div>
+            <div class="p-name">Knot Hats</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-037')">
+            <div class="img-circle-wrapper"><img src="assets/products/beanie-hat.jpg" class="product-img"></div>
+            <div class="p-code">AC - 037</div>
+            <div class="p-name">Beanie Hats</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-038')">
+            <div class="img-circle-wrapper"><img src="assets/products/beach-hat.jpg" class="product-img"></div>
+            <div class="p-code">AC - 038</div>
+            <div class="p-name">Beach Hats</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-039')">
+            <div class="img-circle-wrapper"><img src="assets/products/wash-clothes.jpg" class="product-img"></div>
+            <div class="p-code">AC - 039</div>
+            <div class="p-name">Wash Clothes</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-040')">
+            <div class="img-circle-wrapper"><img src="assets/products/hooded-towels.jpg" class="product-img"></div>
+            <div class="p-code">AC - 040</div>
+            <div class="p-name">Hooded Towels</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-041')">
+            <div class="img-circle-wrapper"><img src="assets/products/milestone-blanket.jpg" class="product-img"></div>
+            <div class="p-code">AC - 041</div>
+            <div class="p-name">Milestone Blanket</div>
+        </div>
+    </div>
+
+    <div id="feeding"></div>
+    <h1 class="category-title">Baby Feeding</h1>
+    <div class="product-grid-container">
+        <div class="product-item" onclick="openModal('AC-042')">
+            <div class="img-circle-wrapper"><img src="assets/products/waterproof-bibs.jpg" class="product-img"></div>
+            <div class="p-code">AC - 042</div>
+            <div class="p-name">Waterproof Bibs</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-043')">
+            <div class="img-circle-wrapper"><img src="assets/products/teether-pad.jpg" class="product-img"></div>
+            <div class="p-code">AC - 043</div>
+            <div class="p-name">Teether Pad Cover</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-044')">
+            <div class="img-circle-wrapper"><img src="assets/products/bandana-bibs.jpg" class="product-img"></div>
+            <div class="p-code">AC - 044</div>
+            <div class="p-name">Bandana Drool Bibs</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-045')">
+            <div class="img-circle-wrapper"><img src="assets/products/muslin-bibs.jpg" class="product-img"></div>
+            <div class="p-code">AC - 045</div>
+            <div class="p-name">Muslin Bibs</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-046')">
+            <div class="img-circle-wrapper"><img src="assets/products/pocket-bibs.jpg" class="product-img"></div>
+            <div class="p-code">AC - 046</div>
+            <div class="p-name">Pocket Bibs</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-047')">
+            <div class="img-circle-wrapper"><img src="assets/products/burp-cloth.jpg" class="product-img"></div>
+            <div class="p-code">AC - 047</div>
+            <div class="p-name">Burp Cloth</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-048')">
+            <div class="img-circle-wrapper"><img src="assets/products/canopy-towel.jpg" class="product-img"></div>
+            <div class="p-code">AC - 048</div>
+            <div class="p-name">Canopy Feeding Towel</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-049')">
+            <div class="img-circle-wrapper"><img src="assets/products/nursing-cover.jpg" class="product-img"></div>
+            <div class="p-code">AC - 049</div>
+            <div class="p-name">Nursing Cover</div>
+        </div>
+        <div class="product-item" onclick="openModal('AC-050')">
+            <div class="img-circle-wrapper"><img src="assets/products/cuddle-goose.jpg" class="product-img"></div>
+            <div class="p-code">AC - 050</div>
+            <div class="p-name">Cuddle Goose</div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="modal-overlay" id="productModal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        
+        <div class="modal-left-column">
+            <div class="modal-image-container">
+                <img src="" id="modalImg" class="modal-image">
+            </div>
+            <div class="modal-gallery-strip" id="modalGallery"></div>
+        </div>
+
+        <div class="modal-details">
+            <div class="modal-code" id="modalCode"></div>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-desc" id="modalDesc"></p>
+            <button class="modal-btn" onclick="alert('Enquiry feature coming soon!')">Enquire Now</button>
+        </div>
+    </div>
+</div>
+
+<footer style="background: white; padding: 40px 0; border-top: 1px solid #ddd;">
+    <div style="text-align: center; color: #555; font-size: 0.9rem;">
+        &copy; 2025 East Coast Corp. All Rights Reserved.
+    </div>
+</footer>
+
+<script>
+    // --- 1. PRODUCT DATABASE WITH FULL DESCRIPTIONS & IMAGE ARRAYS ---
+    // Note: I have duplicated the main image 3 times for the gallery simulation. 
+    // You should replace these with real alternative image paths (e.g., 'img_back.jpg', 'img_side.jpg')
+    
+    const productData = {
+        // SLEEPING
+        'AC-001': { 
+            name: 'Sleeping Bag Tog 0.5', 
+            images: ['assets/products/sleeping-bag-05.jpg', 'assets/products/sleeping-bag-05.jpg', 'assets/products/sleeping-bag-05.jpg'], 
+            desc: 'A lightweight sleeping bag designed for summer months or warmer rooms (24°C+). Made from single-layer 100% organic cotton to keep baby cool and comfortable. Features a safety zipper cover to protect delicate skin and prevent independent opening.' 
+        },
+        'AC-002': { 
+            name: 'Sleeping Bag Tog 1.5', 
+            images: ['assets/products/sleeping-bag-15.jpg', 'assets/products/sleeping-bag-15.jpg', 'assets/products/sleeping-bag-15.jpg'], 
+            desc: 'The perfect all-year-round sleeping bag (20-22°C). Soft organic cotton lining ensures breathability while providing just the right amount of warmth. Wide bottom design allows for healthy hip development and plenty of room to kick.' 
+        },
+        'AC-003': { 
+            name: 'Sleeping Bag Tog 2.5', 
+            images: ['assets/products/sleeping-bag-25.jpg', 'assets/products/sleeping-bag-25.jpg', 'assets/products/sleeping-bag-25.jpg'], 
+            desc: 'Designed for standard room temperatures (16-20°C). Quilted with hypoallergenic filling for a cozy, secure night\'s sleep. Features shoulder snaps and a side zipper for easy middle-of-the-night changes without waking baby.' 
+        },
+        'AC-004': { 
+            name: 'Sleeping Bag Tog 3.5', 
+            images: ['assets/products/sleeping-bag-35.jpg', 'assets/products/sleeping-bag-35.jpg', 'assets/products/sleeping-bag-35.jpg'], 
+            desc: 'Our warmest sleeping bag for winter nights (below 16°C). Features luxurious padding and soft-touch jersey cotton. Includes long sleeves with detachable cuffs to ensure arms stay warm even on the coldest nights.' 
+        },
+        'AC-005': { 
+            name: 'Adjustable Swaddle Wrap', 
+            images: ['assets/products/swaddle-wrap.jpg', 'assets/products/swaddle-wrap.jpg', 'assets/products/swaddle-wrap.jpg'], 
+            desc: 'Easy-wrap swaddle with adjustable velcro wings. Creates a womb-like feeling to calm the startle reflex and help baby sleep longer. Made from soft, stretchy cotton that moves with your baby while keeping them secure.' 
+        },
+        'AC-006': { 
+            name: 'Knotted Swaddle Wrap', 
+            images: ['assets/products/knotted-swaddle.jpg', 'assets/products/knotted-swaddle.jpg', 'assets/products/knotted-swaddle.jpg'], 
+            desc: 'The trendy knotted gown allows for hassle-free diaper changes. Just untie the knot at the bottom—no zippers or snaps required! Includes fold-over mittens to prevent scratching and keep hands warm.' 
+        },
+        'AC-007': { 
+            name: 'Quilt Blanket', 
+            images: ['assets/products/quilt.jpg', 'assets/products/quilt.jpg', 'assets/products/quilt.jpg'], 
+            desc: 'A beautiful heirloom-quality quilt. Hand-stitched organic cotton with a soft poly-fill, perfect for tummy time, stroller walks, or as a decorative nursery accent. Machine washable and durable.' 
+        },
+        'AC-008': { 
+            name: 'Cocoon Swaddle', 
+            images: ['assets/products/cocoon.jpg', 'assets/products/cocoon.jpg', 'assets/products/cocoon.jpg'], 
+            desc: 'A snug, stretchy sack that slides right onto baby like a sock, mimicking the cozy environment of the womb. Comes with a matching beanie for the perfect newborn photo prop or going-home outfit.' 
+        },
+        'AC-009': { 
+            name: 'Muslin Swaddle Blanket', 
+            images: ['assets/products/muslin.jpg', 'assets/products/muslin.jpg', 'assets/products/muslin.jpg'], 
+            desc: 'Generously sized 120x120cm muslin square made from bamboo and cotton blend. Ultra-breathable and versatile—use it for swaddling, nursing cover, stroller sunshade, or a light blanket.' 
+        },
+        
+        // BEDDING
+        'AC-010': { 
+            name: 'Crib Sheet', 
+            images: ['assets/products/crib-sheet.jpg', 'assets/products/crib-sheet.jpg', 'assets/products/crib-sheet.jpg'], 
+            desc: 'Fitted sheet for standard crib mattresses. Made from 100% GOTS certified organic cotton for a soft, chemical-free sleep surface. Features deep pockets and premium elastic for a safe, secure fit that won\'t slip off.' 
+        },
+        'AC-011': { 
+            name: 'Bassinet Sheet', 
+            images: ['assets/products/bassinet-sheet.jpg', 'assets/products/bassinet-sheet.jpg', 'assets/products/bassinet-sheet.jpg'], 
+            desc: 'Smaller fitted sheet designed specifically for oval or rectangular bassinets and Moses baskets. Elasticized all around for a safe, secure fit. Breathable fabric helps regulate baby\'s temperature during sleep.' 
+        },
+        'AC-012': { 
+            name: 'Bed Sheet', 
+            images: ['assets/products/bed-sheet.jpg', 'assets/products/bed-sheet.jpg', 'assets/products/bed-sheet.jpg'], 
+            desc: 'Flat sheet designed for toddler beds or single beds. Crafted from smooth, durable percale weave that gets softer with every wash. Available in a variety of gender-neutral, calming prints.' 
+        },
+        'AC-013': { 
+            name: 'Duvet Cover', 
+            images: ['assets/products/duvet-cover.jpg', 'assets/products/duvet-cover.jpg', 'assets/products/duvet-cover.jpg'], 
+            desc: 'Classic button-closure duvet cover featuring reversible prints to switch up the nursery look. Fits standard cot bed duvets. Machine washable and fade-resistant.' 
+        },
+        'AC-014': { 
+            name: 'Pillow Cover', 
+            images: ['assets/products/pillow-cover.jpg', 'assets/products/pillow-cover.jpg', 'assets/products/pillow-cover.jpg'], 
+            desc: 'Soft pillowcase sized for toddler pillows. Made from hypoallergenic organic cotton to protect delicate facial skin and reduce hair tangling during sleep.' 
+        },
+
+        // APPAREL
+        'AC-015': { 
+            name: 'Onesie', 
+            images: ['assets/products/onesie.jpg', 'assets/products/onesie.jpg', 'assets/products/onesie.jpg'], 
+            desc: 'The essential short-sleeve bodysuit. Envelope neckline allows for pulling down over shoulders rather than over the head for messy changes. Reinforced nickel-free snaps at the bottom.' 
+        },
+        'AC-016': { 
+            name: 'Rompers', 
+            images: ['assets/products/rompers.jpg', 'assets/products/rompers.jpg', 'assets/products/rompers.jpg'], 
+            desc: 'Full-body jumpsuit perfect for play or sleep. Features a two-way zipper for quick diaper access without exposing baby\'s chest to the cold. Includes fold-over cuffs on feet for added warmth options.' 
+        },
+        'AC-017': { 
+            name: 'Bodysuit', 
+            images: ['assets/products/bodysuit.jpg', 'assets/products/bodysuit.jpg', 'assets/products/bodysuit.jpg'], 
+            desc: 'Long-sleeve bodysuit ideal for layering in cooler weather. Made from stretchable interlock cotton that retains shape after washing. Smooth seams prevent irritation on sensitive skin.' 
+        },
+        'AC-018': { 
+            name: 'Two-Piece Pajamas', 
+            images: ['assets/products/pajamas.jpg', 'assets/products/pajamas.jpg', 'assets/products/pajamas.jpg'], 
+            desc: 'Snug-fitting pajama set (top and bottom) for safety regulations. Ribbed cuffs keep warmth in and prevent pant legs from riding up during sleep. Soft elastic waistband is gentle on tummies.' 
+        },
+        'AC-019': { 
+            name: 'Leggings', 
+            images: ['assets/products/leggings.jpg', 'assets/products/leggings.jpg', 'assets/products/leggings.jpg'], 
+            desc: 'Stretchy, comfortable leggings with a gentle elastic waistband. Perfect for crawling and exploring. The ribbed fabric offers extra flexibility and durability for active babies.' 
+        },
+        'AC-020': { 
+            name: 'T-Shirt', 
+            images: ['assets/products/tshirt.jpg', 'assets/products/tshirt.jpg', 'assets/products/tshirt.jpg'], 
+            desc: 'Classic crew neck tee made from ultra-soft jersey cotton. A wardrobe staple that pairs with everything. Tagless label design ensures no itching at the back of the neck.' 
+        },
+        'AC-021': { 
+            name: 'Swimsuit', 
+            images: ['assets/products/swimsuit.jpg', 'assets/products/swimsuit.jpg', 'assets/products/swimsuit.jpg'], 
+            desc: 'UPF 50+ sun protection swimwear. Quick-drying fabric prevents baby from getting cold after leaving the water. Features a cute ruffle design and snap bottom for easy changes.' 
+        },
+        'AC-022': { 
+            name: 'Sweat Shirt', 
+            images: ['assets/products/sweatshirt.jpg', 'assets/products/sweatshirt.jpg', 'assets/products/sweatshirt.jpg'], 
+            desc: 'Cozy pullover for cooler days. Brushed interior provides extra softness and warmth against the skin. Relaxed fit allows for easy layering over bodysuits.' 
+        },
+        'AC-023': { 
+            name: 'Sweat Pants', 
+            images: ['assets/products/sweatpants.jpg', 'assets/products/sweatpants.jpg', 'assets/products/sweatpants.jpg'], 
+            desc: 'Relaxed fit joggers with a functional drawstring waist. Durable enough for the playground, soft enough for naps. Features deep side pockets for toddlers to store treasures.' 
+        },
+        'AC-024': { 
+            name: 'Baby Gown', 
+            images: ['assets/products/gown.jpg', 'assets/products/gown.jpg', 'assets/products/gown.jpg'], 
+            desc: 'Open-bottom gown for newborns with elastic hem. Makes middle-of-the-night changes a breeze—simply pull up, change diaper, and pull down. No snaps to struggle with in the dark.' 
+        },
+
+        // DIAPERING
+        'AC-025': { 
+            name: 'Changing Pad Cover', 
+            images: ['assets/products/pad-cover.jpg', 'assets/products/pad-cover.jpg', 'assets/products/pad-cover.jpg'], 
+            desc: 'Plush minky or cotton cover for standard contoured changing pads. Accommodates safety straps through reinforced buttonholes. Machine washable for easy cleanup of accidents.' 
+        },
+        'AC-026': { 
+            name: 'Diaper Changing Mat', 
+            images: ['assets/products/changing-mat.jpg', 'assets/products/changing-mat.jpg', 'assets/products/changing-mat.jpg'], 
+            desc: 'Portable, foldable changing mat for on-the-go parents. Waterproof surface wipes clean easily—perfect for travel or public restrooms. Padded for baby\'s comfort on hard surfaces.' 
+        },
+        'AC-027': { 
+            name: 'Cloth Diaper', 
+            images: ['assets/products/cloth-diaper.jpg', 'assets/products/cloth-diaper.jpg', 'assets/products/cloth-diaper.jpg'], 
+            desc: 'Eco-friendly reusable pocket diaper. Adjustable snaps allow the diaper to grow with your baby (One Size Fits Most, 8-35 lbs). Waterproof PUL outer layer prevents leaks while fleece inner keeps baby dry.' 
+        },
+        'AC-028': { 
+            name: 'Diaper Inserts', 
+            images: ['assets/products/diaper-inserts.jpg', 'assets/products/diaper-inserts.jpg', 'assets/products/diaper-inserts.jpg'], 
+            desc: 'Highly absorbent 4-layer bamboo charcoal inserts. Wicks moisture away quickly to prevent diaper rash. Compatible with most brands of pocket diapers.' 
+        },
+        'AC-029': { 
+            name: 'Pre-Fold', 
+            images: ['assets/products/pre-fold.jpg', 'assets/products/pre-fold.jpg', 'assets/products/pre-fold.jpg'], 
+            desc: 'Classic unbleached organic cotton prefolds. Extremely durable, absorbent, and multi-purpose—can be used as diapers, burp cloths, or cleaning rags. Requires a diaper cover.' 
+        },
+        'AC-030': { 
+            name: 'Sanitary Pads', 
+            images: ['assets/products/sanitary-pads.jpg', 'assets/products/sanitary-pads.jpg', 'assets/products/sanitary-pads.jpg'], 
+            desc: 'Reusable postpartum or menstrual pads made from soft bamboo charcoal and waterproof backing. Breathable and chemical-free, offering superior comfort compared to disposables.' 
+        },
+        'AC-031': { 
+            name: 'Training Pants', 
+            images: ['assets/products/training-pants.jpg', 'assets/products/training-pants.jpg', 'assets/products/training-pants.jpg'], 
+            desc: 'Absorbent underwear designed for potty training. Helps toddlers feel wetness to learn, while the waterproof inner layer prevents big leaks from soaking through to outer clothes.' 
+        },
+        'AC-032': { 
+            name: 'Wet Bags', 
+            images: ['assets/products/wet-bags.jpg', 'assets/products/wet-bags.jpg', 'assets/products/wet-bags.jpg'], 
+            desc: 'Waterproof bag with zipper closure and snap handle. Keeps wet clothes, soiled diapers, or swimwear separate from the rest of your diaper bag. Machine washable and reusable.' 
+        },
+
+        // ACCESSORIES
+        'AC-033': { 
+            name: 'Mittens', 
+            images: ['assets/products/mittens.jpg', 'assets/products/mittens.jpg', 'assets/products/mittens.jpg'], 
+            desc: 'Soft scratch mittens to protect baby’s delicate face from sharp fingernails. Gentle elastic wrist ensures they stay on without being too tight on circulation.' 
+        },
+        'AC-034': { 
+            name: 'Bonnets', 
+            images: ['assets/products/bonnets.jpg', 'assets/products/bonnets.jpg', 'assets/products/bonnets.jpg'], 
+            desc: 'Vintage-style bonnet with secure under-chin tie closure. Protects ears from wind and sun while framing baby\'s face perfectly. Made from lightweight linen-cotton blend.' 
+        },
+        'AC-035': { 
+            name: 'Booties', 
+            images: ['assets/products/booties.jpg', 'assets/products/booties.jpg', 'assets/products/booties.jpg'], 
+            desc: 'Fleece-lined booties with non-slip soles. Keeps little toes toasty warm in winter. The adjustable snap ankle closure ensures they actually stay on kicking feet.' 
+        },
+        'AC-036': { 
+            name: 'Knot Hats', 
+            images: ['assets/products/knot-hat.jpg', 'assets/products/knot-hat.jpg', 'assets/products/knot-hat.jpg'], 
+            desc: 'Adjustable top knot hat. You can re-tie the knot to adjust the height and fit as baby grows. Soft, stretchy fabric ensures comfort for newborns.' 
+        },
+        'AC-037': { 
+            name: 'Beanie Hats', 
+            images: ['assets/products/beanie-hat.jpg', 'assets/products/beanie-hat.jpg', 'assets/products/beanie-hat.jpg'], 
+            desc: 'Classic double-layer jersey beanie. Essential for regulating a newborn’s temperature in the first few weeks. Simple design matches any outfit.' 
+        },
+        'AC-038': { 
+            name: 'Beach Hats', 
+            images: ['assets/products/beach-hat.jpg', 'assets/products/beach-hat.jpg', 'assets/products/beach-hat.jpg'], 
+            desc: 'Wide-brim sun hat with neck strap. Essential UV protection for beach days or park walks. Lightweight and foldable for easy packing.' 
+        },
+        'AC-039': { 
+            name: 'Wash Clothes', 
+            images: ['assets/products/wash-clothes.jpg', 'assets/products/wash-clothes.jpg', 'assets/products/wash-clothes.jpg'], 
+            desc: 'Pack of 5 ultra-soft bamboo/cotton terry washcloths. Gentle enough for cleaning face, hands, and sensitive areas during bath time. Quick-drying and naturally antibacterial.' 
+        },
+        'AC-040': { 
+            name: 'Hooded Towels', 
+            images: ['assets/products/hooded-towels.jpg', 'assets/products/hooded-towels.jpg', 'assets/products/hooded-towels.jpg'], 
+            desc: 'Large absorbent towel with a corner hood. Wraps baby in warmth immediately after bath time, drying hair and body simultaneously. Cute design makes bath time fun.' 
+        },
+        'AC-041': { 
+            name: 'Milestone Blanket', 
+            images: ['assets/products/milestone-blanket.jpg', 'assets/products/milestone-blanket.jpg', 'assets/products/milestone-blanket.jpg'], 
+            desc: 'Photo backdrop blanket with numbers 1-12 to track baby’s growth month by month. Comes with a felt frame marker. A perfect keepsake gift for baby showers.' 
+        },
+
+        // FEEDING
+        'AC-042': { 
+            name: 'Waterproof Bibs', 
+            images: ['assets/products/waterproof-bibs.jpg', 'assets/products/waterproof-bibs.jpg', 'assets/products/waterproof-bibs.jpg'], 
+            desc: 'Full-coverage sleeved bib for messy eaters or art projects. Wipe-clean waterproof fabric protects clothes from stains. Tie closure at back ensures a secure fit.' 
+        },
+        'AC-043': { 
+            name: 'Teether Pad Cover', 
+            images: ['assets/products/teether-pad.jpg', 'assets/products/teether-pad.jpg', 'assets/products/teether-pad.jpg'], 
+            desc: 'Wraps around baby carrier straps to protect them from drool and teething. Provides a clean surface for baby to chew on. Machine washable for easy hygiene.' 
+        },
+        'AC-044': { 
+            name: 'Bandana Drool Bibs', 
+            images: ['assets/products/bandana-bibs.jpg', 'assets/products/bandana-bibs.jpg', 'assets/products/bandana-bibs.jpg'], 
+            desc: 'Stylish triangle bibs designed for teething, drooling babies. Absorbent cotton front catches drips, while fleece backing keeps moisture from soaking through to the chest.' 
+        },
+        'AC-045': { 
+            name: 'Muslin Bibs', 
+            images: ['assets/products/muslin-bibs.jpg', 'assets/products/muslin-bibs.jpg', 'assets/products/muslin-bibs.jpg'], 
+            desc: 'Super absorbent multi-layer muslin snap bibs. The fabric crinkles slightly and gets softer with every wash. Perfect for wiping milk spills and drool.' 
+        },
+        'AC-046': { 
+            name: 'Pocket Bibs', 
+            images: ['assets/products/pocket-bibs.jpg', 'assets/products/pocket-bibs.jpg', 'assets/products/pocket-bibs.jpg'], 
+            desc: 'Food-grade silicone or waterproof fabric bib with a large, wide food catcher pocket. Catches dropped food to keep mealtime messes off the floor. Dishwasher safe.' 
+        },
+        'AC-047': { 
+            name: 'Burp Cloth', 
+            images: ['assets/products/burp-cloth.jpg', 'assets/products/burp-cloth.jpg', 'assets/products/burp-cloth.jpg'], 
+            desc: 'Kidney-shaped cloth designed to contour perfectly over your shoulder. Maximum absorbency triple-layer fabric protects parents clothes from spit-up.' 
+        },
+        'AC-048': { 
+            name: 'Canopy Feeding Towel', 
+            images: ['assets/products/canopy-towel.jpg', 'assets/products/canopy-towel.jpg', 'assets/products/canopy-towel.jpg'], 
+            desc: 'Multi-use cover for car seats or nursing privacy. Stretchy, breathable fabric creates a dark environment for naps while preventing overheating. Protects from wind and nosy strangers.' 
+        },
+        'AC-049': { 
+            name: 'Nursing Cover', 
+            images: ['assets/products/nursing-cover.jpg', 'assets/products/nursing-cover.jpg', 'assets/products/nursing-cover.jpg'], 
+            desc: 'Apron-style nursing cover with rigid neckline allows direct eye contact with baby while feeding, ensuring airflow. Adjustable neck strap for custom fit.' 
+        },
+        'AC-050': { 
+            name: 'Cuddle Goose', 
+            images: ['assets/products/cuddle-goose.jpg', 'assets/products/cuddle-goose.jpg', 'assets/products/cuddle-goose.jpg'], 
+            desc: 'Soft comforting toy/lovey shaped like a goose. Made from organic cotton with no small detachable parts, making it safe for sleep and snuggles from birth.' 
+        }
+    };
+
+    // --- 2. MODAL FUNCTIONS (UPDATED FOR GALLERY) ---
+
+    function openModal(id) {
+        const modal = document.getElementById('productModal');
+        const img = document.getElementById('modalImg');
+        const title = document.getElementById('modalTitle');
+        const code = document.getElementById('modalCode');
+        const desc = document.getElementById('modalDesc');
+        const gallery = document.getElementById('modalGallery');
+
+        let product = productData[id];
+
+        // FALLBACK: If ID not in database
+        if (!product) {
+            const clickedItem = document.querySelector(`[onclick="openModal('${id}')"]`);
+            if (clickedItem) {
+                const imgElem = clickedItem.querySelector('.product-img');
+                const nameElem = clickedItem.querySelector('.p-name');
+                const src = imgElem ? imgElem.src : '';
+                product = {
+                    name: nameElem ? nameElem.innerText : 'Product Name',
+                    images: [src, src, src], // Mock gallery
+                    desc: 'Detailed description coming soon.'
+                };
+            }
+        }
+
+        if (product) {
+            title.innerText = product.name;
+            code.innerText = id;
+            desc.innerText = product.desc;
+            
+            // Set Main Image (First in array)
+            img.src = product.images[0];
+
+            // Generate Thumbnails
+            gallery.innerHTML = ''; // Clear previous
+            product.images.forEach((imgSrc, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = imgSrc;
+                thumb.classList.add('modal-thumb');
+                if (index === 0) thumb.classList.add('active'); // Highlight first
+                
+                // Click event to swap main image
+                thumb.onclick = function() {
+                    document.getElementById('modalImg').src = imgSrc;
+                    // Update active class
+                    document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                };
+                
+                gallery.appendChild(thumb);
+            });
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop scrolling
+        }
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('productModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Resume scrolling
+    }
+
+
+</script>
+
+</body>
+</html>
