@@ -231,6 +231,54 @@
         }
         
         .close-btn:hover { color: #333; }
+        /* --- RESPONSIVE MODAL FIX --- */
+    @media screen and (max-width: 768px) {
+        
+        .modal-content {
+            /* Change from Grid to Flex Column so items stack */
+            display: flex;
+            flex-direction: column;
+            width: 95%; /* Use almost full width on mobile */
+            height: auto;
+            max-height: 90vh; /* Keep it within viewport */
+            overflow-y: auto; /* Enable vertical scrolling for the whole card */
+        }
+
+        .modal-left-column {
+            width: 100%; /* Full width */
+            padding: 15px;
+            background-color: #fff; /* Match background if preferred */
+        }
+
+        .modal-image-container {
+            height: 250px; /* Reduce image height for mobile */
+        }
+
+        .modal-details {
+            width: 100%; /* Full width */
+            padding: 20px;
+            height: auto; /* Let it grow naturally */
+            overflow-y: visible; /* Remove internal scroll, let parent scroll */
+        }
+
+        .modal-title {
+            font-size: 1.5rem; /* Slightly smaller font */
+        }
+
+        .close-btn {
+            top: 10px;
+            right: 15px;
+            color: #333; /* Make sure it's visible against white/grey */
+            background: rgba(255, 255, 255, 0.8); /* Optional: add background for visibility */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+    }
 
     </style>
 </head>
