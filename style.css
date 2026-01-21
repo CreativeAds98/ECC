@@ -6,6 +6,7 @@
             --bg-grey: #f5f5f5;
             --gold: #c5a059;
             --red: #cc0000;
+            --Violet:#384a7a;
         }
 
         html {
@@ -43,7 +44,7 @@
         }
 
         .promo-highlight {
-            color: var(--gold); /* Highlight the code in gold */
+            color: #d32f2f; /* Highlight the code in gold */
             font-weight: 700;
             margin-left: 8px;
         }
@@ -313,7 +314,7 @@
     display: block;
     width: 60px;
     height: 3px;
-    background-color: #c5a059;
+    background-color: #384a7a;
     margin: 20px auto 0 auto;
 }
 
@@ -397,7 +398,7 @@
 
 /* 4. Gold Text */
 .slide-item:hover .slide-label {
-    color: #c5a059;
+    color: #384a7a;
 }
 
 /* --- Animation Logic --- */
@@ -441,7 +442,7 @@
                 display: block;
                 width: 60px;               /* Width of the line */
                 height: 3px;               /* Thickness */
-                background-color: #c5a059; /* Gold Color */
+                background-color: #384a7a; /* Logo Color */
                 margin: 15px auto 0 auto;  /* Centers the line below text */
             }
 
@@ -474,7 +475,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #c5a059; /* Gold Accent */
+            color: #384a7a; /* Logo Accent */
             margin-bottom: 20px;
         }
 
@@ -535,8 +536,8 @@
         }
 
         .read-more-link:hover {
-            color: #c5a059;
-            border-color: #c5a059;
+            color: #384a7a;
+            border-color: #111;
         }
 
         /* --- Image Styling --- */
@@ -615,7 +616,7 @@
             display: block;
             width: 60px;               /* Length of the line */
             height: 3px;               /* Thickness */
-            background-color: #c5a059; /* Gold Color */
+            background-color: #384a7a; /* Logo Color */
             margin: 15px auto 0 auto;  /* Centers the line below text */
         }
 
@@ -872,7 +873,7 @@
 .separator-line-center {
     width: 50px;
     height: 2px;
-    background-color: #c5a059; /* Gold Accent */
+    background-color: #384a7a; /* Logo Accent */
     margin: 0 auto 15px auto;
 }
 
@@ -1032,7 +1033,7 @@ footer {
 }
 
 .footer-socials a:hover {
-    color: #c5a059; /* Gold Hover */
+    color: #384a7a; /* Gold Hover */
 }
 
 /* --- Links --- */
@@ -1101,7 +1102,7 @@ footer {
 }
 
 .footer-form button:hover {
-    color: #c5a059;
+    color: #384a7a;
 }
 
 /* --- Bottom Bar (Darker Shade) --- */
