@@ -240,36 +240,69 @@
             </div>
         </div>
 
-        <div class="contact-form-wrapper">
-            <form>
+            <div class="contact-form-wrapper">
+            <form action="https://api.web3forms.com/submit" method="POST">
+
+                <!-- Web3Forms Access Key -->
+                <input type="hidden" name="access_key" value="82ddfa77-cc30-4b61-8cb5-2e5a3ede8950">
+
+                <!-- Optional: Redirect after submit -->
+                <!-- <input type="hidden" name="redirect" value="https://yourwebsite.com/thank-you.html"> -->
+
+                <!-- Full Name -->
                 <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" class="form-control" placeholder="Enter your name" required>
+                <label>Full Name</label>
+                <input 
+                    type="text" 
+                    name="name" 
+                    class="form-control" 
+                    placeholder="Enter your name" 
+                    required>
                 </div>
 
+                <!-- Email -->
                 <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" class="form-control" placeholder="Enter your email" required>
+                <label>Email Address</label>
+                <input 
+                    type="email" 
+                    name="email" 
+                    class="form-control" 
+                    placeholder="Enter your email" 
+                    required>
                 </div>
 
+                <!-- Subject -->
                 <div class="form-group">
-                    <label>Subject</label>
-                    <select class="form-control">
-                        <option>Wholesale Inquiry (MOQ 100+)</option>
-                        <option>Custom Manufacturing (OEM)</option>
-                        <option>Request a Sample</option>
-                        <option>General Support</option>
-                    </select>
+                <label>Subject</label>
+                <select 
+                    name="subject" 
+                    class="form-control" 
+                    required>
+                    <option value="Wholesale Inquiry (MOQ 100+)">Wholesale Inquiry (MOQ 100+)</option>
+                    <option value="Custom Manufacturing (OEM)">Custom Manufacturing (OEM)</option>
+                    <option value="Request a Sample">Request a Sample</option>
+                    <option value="General Support">General Support</option>
+                </select>
                 </div>
 
+                <!-- Message -->
                 <div class="form-group">
-                    <label>Message</label>
-                    <textarea class="form-control" placeholder="How can we help you?"></textarea>
+                <label>Message</label>
+                <textarea 
+                    name="message" 
+                    class="form-control" 
+                    placeholder="How can we help you?" 
+                    required></textarea>
                 </div>
 
-                <button type="submit" class="submit-btn">Send Message</button>
+                <!-- Submit -->
+                <button type="submit" class="submit-btn">
+                Send Message
+                </button>
+
             </form>
-        </div>
+            </div>
+
 
     </div>
 
