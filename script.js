@@ -112,6 +112,29 @@ startAnimation();
 
 
 
+// --- SCROLL TO TOP LOGIC ---
+
+// 1. Select the button
+const scrollBtn = document.getElementById("scrollTopBtn");
+
+// 2. Listen for scroll events
+window.onscroll = function() {
+    // If user scrolled down 300px, show button. Otherwise hide it.
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        scrollBtn.style.display = "block";
+    } else {
+        scrollBtn.style.display = "none";
+    }
+};
+
+// 3. When clicked, scroll to top smoothly
+scrollBtn.addEventListener("click", function() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+
 
 
 
