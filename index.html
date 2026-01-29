@@ -348,7 +348,7 @@
                 <li><a href="#Trends">New Arrivals</a></li>
                 <li><a href="#Trends">Best Seller</a></li>
                 <li><a href="product.html">Products</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </div>
 
@@ -358,7 +358,7 @@
                 <li><a href="#">Track Order</a></li>
                 <li><a href="#">Shipping & Returns</a></li>
                 <li><a href="#">Size Guide</a></li>
-                <li><a href="#">Contact Us</a></li>
+                
             </ul>
         </div>
 
@@ -366,10 +366,29 @@
             <h4>The Family List</h4>
             <p>Subscribe for a special welcome gift on your first order and priority access to new collections..</p>
             
-            <form class="footer-form">
-                <input type="email" placeholder="Email Address" required>
-                <button type="submit">→</button>
-            </form>
+<form 
+  class="footer-form"
+  action="https://api.web3forms.com/submit"
+  method="POST"
+>
+
+  <!-- Web3Forms Access Key -->
+  <input type="hidden" name="access_key" value="82ddfa77-cc30-4b61-8cb5-2e5a3ede8950">
+
+  <!-- Email Field -->
+  <input 
+    type="email" 
+    name="email"
+    placeholder="Email Address" 
+    required>
+
+  <!-- Optional hidden subject -->
+  <input type="hidden" name="subject" value="Footer Subscription Request">
+
+  <button type="submit">→</button>
+
+</form>
+
         </div>
 
     </div>
